@@ -1,6 +1,7 @@
 name: Minecraft server
 
 on:
+  push:
   schedule:
     - cron:  '0 */6 * * *'
 
