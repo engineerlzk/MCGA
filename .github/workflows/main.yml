@@ -1,0 +1,30 @@
+name: Minecraft server
+
+on:
+  schedule:
+    - cron:  '0 */6 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.3.0
+      with:
+        # The Java version to make available on the path. Takes a whole or semver Java version, or 1.x syntax (e.g. 1.8 => Java 8.x)
+        java-version: 1.8
+        # The package type (jre, jdk, jdk+fx)
+        java-package: jre
+
+    - uses: actions/checkout@v2
+    - name: Setup server
+      run: |
+        mkdir frp
+        wget -O frp/frpc.tar.gz https://cdn.tcotp.cn:4443/client/Sakura_frpc_linux_amd64.tar.gz
+        wget https://launcher.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar
+        cd frp
+        tar -xzvf frpc.tar.gz
+        echo 'eula=true' > eula.txt
+        java -Xmx6144M -Xms6144M -jar server.jar nogui
