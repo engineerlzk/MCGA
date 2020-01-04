@@ -27,6 +27,7 @@ mc_start() {
   else
     echo "Starting $SERVICE..."
     cd $MCPATH
+    echo "cd $MCPATH && sudo screen -h $HISTORY -dmS ${SCREENNAME} \"${INVOCATION}\""
     as_user "cd $MCPATH && sudo screen -h $HISTORY -dmS ${SCREENNAME} \"${INVOCATION}\""
     sleep 7
     if pgrep -u $USERNAME -f $SERVICE > /dev/null ; then
