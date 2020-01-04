@@ -1,3 +1,4 @@
+??? from here until ???END lines may have been inserted/deleted
 name: Minecraft server
 
 on:
@@ -24,6 +25,24 @@ jobs:
       env:
         skfrp_username: ${{ secrets.skfrp_username }}
         skfrp_password: ${{ secrets.skfrp_password }}
+        username: ${{ secrets.username }}
+        email: ${{ secrets.email }}
       run: |
+        apt install -y screen
+        cd ~/work/MCGA
+        chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
-        java -server -Xms3G -Xmx3G -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+UseLargePagesInMetaspace -Dusing.aikars.flags=mcflags.emc.gs -jar paperclip.jar
+        ./server.sh start
+        sleep 5m
+        #sleep 352m
+        ./server.sh stop
+        rm -f logs/*
+        git config --global user.email $email
+        git config --global user.name $username
+        git add .
+        git commit -m 'Update world'
+
+        - name: GitHub Push
+          uses: ad-m/github-push-action@v0.5.0
+          with:
+            github_token: $\{{ secrets.GITHUB_TOKEN }}
