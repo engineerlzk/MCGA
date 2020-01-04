@@ -32,7 +32,7 @@ jobs:
         chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
         ./server.sh start
-        sleep 5m
+        sleep 1m
         #sleep 352m
         ./server.sh stop
         rm -f logs/*
