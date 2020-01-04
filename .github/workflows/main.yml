@@ -28,7 +28,7 @@ jobs:
         email: ${{ secrets.email }}
       run: |
         sudo apt install -y screen
-        cd ~/work/MCGA
+        cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
         ./server.sh start
