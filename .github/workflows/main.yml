@@ -35,7 +35,7 @@ jobs:
         sleep 1m
         #sleep 352m
         ./server.sh stop
-        rm -f logs/*
+        sudo rm -f logs/*
         git config --global user.email $email
         git config --global user.name $username
         git add .
