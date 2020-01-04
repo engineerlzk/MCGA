@@ -27,12 +27,12 @@ jobs:
         username: ${{ secrets.username }}
         email: ${{ secrets.email }}
       run: |
-        sudo apt install -y screen
+        sudo apt update && sudo apt upgrade -y
         cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
-        #./server.sh start
-        java -Xmx6144M -Xms6144M -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+UseLargePagesInMetaspace -Dusing.aikars.flags=mcflags.emc.gs -jar paperclip.jar
+        ./server.sh start
+        #java -Xmx6144M -Xms6144M -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+UseLargePagesInMetaspace -Dusing.aikars.flags=mcflags.emc.gs -jar paperclip.jar
         sleep 1m
         #sleep 352m
         ./server.sh stop
