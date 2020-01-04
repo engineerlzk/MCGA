@@ -27,7 +27,6 @@ jobs:
         username: ${{ secrets.username }}
         email: ${{ secrets.email }}
       run: |
-        sudo apt update && sudo apt autoremove -y && sudo apt upgrade -y
         cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
