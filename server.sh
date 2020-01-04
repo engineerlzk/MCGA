@@ -1,9 +1,10 @@
 #!/bin/bash
 SERVICE='paperclip.jar'
 SCREENNAME='minecraft_server'
-USERNAME='runner'
+USERNAME='user'
 WORLD='world'
-MCPATH=~/work/MCGA/MCGA
+MCPATH='/home/user/MCGA'
+#MCPATH='/home/runner/work/MCGA/MCGA'
 BACKUPPATH='/MCGA/minecraft.backup'
 MAXHEAP=2048
 MINHEAP=2048
@@ -21,7 +22,7 @@ as_user() {
 }
 
 mc_start() {
-  if  pgrep -u $USERNAME -f $SERVICE > /dev/null ; then
+  if pgrep -u $USERNAME -f $SERVICE > /dev/null ; then
     echo "$SERVICE is already running!"
   else
     echo "Starting $SERVICE..."
