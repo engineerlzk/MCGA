@@ -27,7 +27,7 @@ jobs:
         username: ${{ secrets.username }}
         email: ${{ secrets.email }}
       run: |
-        apt install -y screen
+        sudo apt install -y screen
         cd ~/work/MCGA
         chmod 755 frp/frpc server.sh
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
