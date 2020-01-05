@@ -29,7 +29,7 @@ jobs:
       run: |
         cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc server.sh
-        curl 'https://frp.tcotp.cn:4443/?version=2300&do=update'
+        #curl 'https://frp.tcotp.cn:4443/?version=2300&do=update'
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=1 &
         sudo mkdir /run/screen && sudo chmod 777 /run/screen
         ./server.sh start
