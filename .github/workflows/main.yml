@@ -31,6 +31,7 @@ jobs:
         chmod 755 frp/frpc server.sh
         #curl 'https://frp.tcotp.cn:4443/?version=2300&do=update'
         ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=14 &
+        ./frp/frpc_origin -c ./frp/frpc.ini &
         sudo mkdir /run/screen && sudo chmod 777 /run/screen
         ./server.sh start
         #java -Xmx6144M -Xms6144M -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -XX:+UseLargePagesInMetaspace -Dusing.aikars.flags=mcflags.emc.gs -jar paperclip.jar
