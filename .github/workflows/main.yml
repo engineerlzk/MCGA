@@ -26,11 +26,12 @@ jobs:
         skfrp_password: ${{ secrets.skfrp_password }}
         username: ${{ secrets.username }}
         email: ${{ secrets.email }}
+        frpid: ${{ secrets.frpid }}
       run: |
         cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc frp/frpc_origin server.sh
         #curl 'https://frp.tcotp.cn:4443/?version=2300&do=update'
-        ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=14 &
+        ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=14 --sc=${frpid} &
         ./frp/frpc_origin -c ./frp/frpc.ini &
         sudo mkdir /run/screen && sudo chmod 777 /run/screen
         ./server.sh start
